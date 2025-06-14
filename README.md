@@ -1,42 +1,88 @@
-<h1 align = "center"> 
+# Video Chat Platform
 
-![iggle](https://github.com/amitanshusahu/Omegle-fullstack/assets/83657737/fdeae2a5-a5aa-456a-9160-aeb87e265e8c)
+A real-time video chat application built with WebRTC, allowing users to connect with strangers for video conversations. The platform features a clean, modern UI with dark mode support and includes text chat functionality.
 
+## Features
 
-</h1>
+- 🎥 Real-time video chat using WebRTC
+- 💬 Text chat functionality
+- 🌙 Dark mode interface
+- 📱 Responsive design
+- 🔄 Random stranger matching
+- 🎨 Modern, minimalist UI
 
+## Tech Stack
 
----
+- **Frontend:**
+  - HTML5
+  - CSS3
+  - JavaScript
+  - WebRTC API
 
-<div align="center">
-  
-![gihub-thumbnail](https://github.com/amitanshusahu/Omegle-fullstack/assets/83657737/7371b48d-da29-4c9b-bbb9-7b6e73207935)
+- **Backend:**
+  - Node.js
+  - TypeScript
+  - Socket.IO
+  - Express
 
-[🔴 watch demo on youtube](https://youtu.be/GZyKcIvQqi8)
+## Prerequisites
 
-</div>
+- Node.js (v14 or higher)
+- npm (v6 or higher)
 
----
+## Installation
 
-## 📌 Set up project
-- clone the repo and go into it
+1. Clone the repository:
 ```bash
-git clone https://github.com/amitanshusahu/Omegle-fullstack/ & cd Omegle-fullstack/
+git clone https://github.com/Krixhnnna/Video-Chatting-Platform.git
+cd Video-Chatting-Platform
 ```
-- go to the client folder and start dev server
+
+2. Install client dependencies:
 ```bash
-cd client && npm run dev
+cd client
+npm install
 ```
-- go to the server folder and start server
+
+3. Install server dependencies:
 ```bash
-cd ../server && npm start
+cd ../server
+npm install
 ```
 
-## Useful Links
+## Running the Application
 
-- [WebRTC Crash Course - deep dive](https://youtu.be/FExZvpVvYxA)
+1. Start the client development server:
+```bash
+cd client
+npm run dev
+```
 
----
+2. Start the backend server:
+```bash
+cd ../server
+npm start
+```
 
-<h1 align="center"> Star the Repo ⭐ </h1>
-# Video-Chatting-Platform
+3. Open your browser and navigate to `http://localhost:5173`
+
+## Usage
+
+1. Click "Start Video Chat" on the home page
+2. Allow camera and microphone permissions
+3. Wait to be matched with a stranger
+4. Use the chat interface to communicate via text
+5. Click "Stop Call" to end the conversation
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- WebRTC for peer-to-peer communication
+- Socket.IO for real-time signaling
