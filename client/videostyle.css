@@ -1,0 +1,363 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: #000000;
+  color: #e0e0e0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Loading Modal (kept for functionality, hidden by default) */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: none; /* Hidden by default, show via JavaScript */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  text-align: center;
+  background-color: #1c1c1e;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #3a3a3c;
+  border-top-color: #007aff;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#spinner {
+  color: #e0e0e0;
+  font-size: 1.1em;
+  font-weight: 500;
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.5; }
+}
+
+/* Main Container */
+.main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background-color: #000000;
+  border-bottom: 1px solid #1c1c1e;
+}
+
+.app-header .logo {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
+.app-header .nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.app-header .nav-btn {
+  background-color: #2c2c2e;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 15px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.app-header .nav-btn:hover {
+  background-color: #3a3a3c;
+}
+
+.app-header .nav-btn.active {
+  background-color: #007aff;
+  color: white;
+}
+
+.app-header .nav-btn svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+/* Content Area */
+.content-area {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 400px 1fr; /* Fixed width for video area, chat takes remaining */
+  gap: 15px;
+  padding: 15px;
+  overflow: hidden;
+}
+
+/* Video Panels */
+.video-panels {
+  display: flex; /* Changed to flex for vertical stacking */
+  flex-direction: column;
+  gap: 15px;
+  background-color: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 100%; /* Take full height of content-area grid cell */
+  width: 100%; /* Ensure it takes full width of its grid cell */
+  aspect-ratio: 1 / 1; /* Make the entire video panels container square */
+  padding: 15px;
+  box-sizing: border-box; /* Include padding in total dimensions */
+}
+
+.video-panel {
+  position: relative;
+  background-color: #1c1c1e;
+  border-radius: 12px;
+  overflow: hidden;
+  flex: 1; /* Each video panel takes equal vertical space */
+  width: 100%; /* Take full width of parent */
+  min-height: 0; /* Important for flex items with aspect-ratio or height/width */
+}
+
+.video-panel video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000000;
+}
+
+/* Specific video panel sizing/positioning if needed - based on image, they are equal height for now */
+.video-panel.main-video {
+  /* Potentially larger video, if the top one is the primary */
+}
+
+.video-panel.second-video {
+  /* Smaller, secondary video if needed */
+}
+
+/* Chat Section */
+.chat-section {
+  display: flex;
+  flex-direction: column;
+  background-color: #000000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.messages-container {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messages-container .wrapper {
+  /* The wrapper will contain individual message elements */
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between messages */
+}
+
+.msg {
+  padding: 10px 15px;
+  border-radius: 18px; /* For speech bubble effect */
+  max-width: 80%;
+  font-size: 0.95em;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.msg.sent {
+  background-color: #007aff;
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px; /* Pointy end for speech bubble */
+}
+
+.msg.received {
+  background-color: #2c2c2e;
+  color: #e0e0e0;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px; /* Pointy end for speech bubble */
+}
+
+.chat-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background-color: #000000;
+  border-top: 1px solid #1c1c1e;
+}
+
+.stop-button {
+  background-color: #ff3b30;
+  color: white;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.stop-button:hover {
+  background-color: #cc0000;
+}
+
+.input-area {
+  flex: 1;
+  display: flex;
+  background-color: #1c1c1e;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  background-color: transparent;
+  color: #e0e0e0;
+  font-size: 1em;
+  outline: none;
+}
+
+.input-area input::placeholder {
+  color: #8e8e93;
+}
+
+.send-button {
+  background-color: transparent;
+  border: none;
+  color: #007aff;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.send-button:hover {
+  color: #005bb5;
+}
+
+.send-button svg {
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg); /* To make it point right */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content-area {
+    grid-template-columns: 1fr; /* Stack video and chat vertically */
+    grid-template-rows: 2fr 1fr; /* Adjust ratios as needed */
+  }
+
+  .video-panels {
+    grid-template-rows: 1fr; /* Single video panel on smaller screens? Or side-by-side if enough width? */
+  }
+
+  .chat-section {
+    height: 40vh; /* Give chat a fixed height on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 10px 15px;
+  }
+
+  .app-header .logo {
+    font-size: 1.5em;
+  }
+
+  .app-header .nav-btn {
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+
+  .content-area {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .messages-container {
+    padding: 10px;
+  }
+
+  .msg {
+    font-size: 0.9em;
+    padding: 8px 12px;
+  }
+
+  .chat-controls {
+    padding: 10px;
+  }
+
+  .stop-button {
+    padding: 10px 15px;
+    font-size: 0.9em;
+  }
+
+  .input-area input {
+    padding: 10px 12px;
+    font-size: 0.9em;
+  }
+
+  .send-button {
+    padding: 8px;
+  }
+  .send-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
